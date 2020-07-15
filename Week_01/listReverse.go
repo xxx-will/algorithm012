@@ -45,4 +45,42 @@ func reverseList(head *Node) *Node {
 
 func exchangeOddEven(head *Node) *Node {
 
+	cur := &Node{}
+	cur.Next = head.Next
+	pre := head
+
+	for pre != nil && pre.Next != nil {
+		tmp := pre.Next.Next
+
+		pre.Next.Next = pre
+		pre.Next = tmp
+		pre = tmp
+
+	}
+
+	return cur.Next
+}
+
+// 把所有的奇数节点和偶数节点分别排在一起
+func oddEvenList(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	odd := head
+	even := head.Next
+
+	mark := head.Next
+
+	for odd != nil && even != nil && even.Next != nil {
+		odd.Next = even.Next
+		odd = odd.Next
+
+		even.Next = odd.Next
+		even = even.Next
+	}
+
+	odd.Next = mark
+
+	return head
 }
