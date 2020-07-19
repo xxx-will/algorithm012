@@ -13,19 +13,20 @@ func groupAnagrams(strs []string) [][]string {
 
 	res := make([]([]string), 0)
 	for i, s := range strs {
-		fmt.Println("sort -pre", s)
-		// todo
-		sort.Slice([]byte(s), func(i, j int) bool {
-			flag := s[i] < s[j]
-			fmt.Println("flag is ", flag)
-			return flag
+		b := []byte(s)
+
+		// sort todo
+		sort.Slice(b, func(i, j int) bool {
+			return s[i] < s[j]
 		})
-		fmt.Println("sort-", s)
-		index, ok := indexMap[s]
+
+		ss := string(b)
+		index, ok := indexMap[ss]
+		fmt.Println(indexMap)
 		if ok {
 			res[index] = append(res[index], strs[i])
 		} else {
-			indexMap[s] = l
+			indexMap[ss] = l
 			arr := []string{strs[i]}
 
 			res = append(res, arr)
@@ -41,5 +42,8 @@ func main() {
 
 	ss := groupAnagrams(strs)
 
-	fmt.Println(ss)
+	for i, v := range ss {
+		fmt.Println("No.", i, " = ", v)
+	}
+
 }
