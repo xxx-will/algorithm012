@@ -17,7 +17,7 @@ func groupAnagrams(strs []string) [][]string {
 
 		// sort todo
 		sort.Slice(b, func(i, j int) bool {
-			return s[i] < s[j]
+			return b[i] < b[j]
 		})
 
 		ss := string(b)
