@@ -38,3 +38,59 @@ func longestValidParentheses(s string) int {
 
 	return longest
 }
+
+//栈的解法
+//
+
+type Stack struct {
+	top *Node
+	len int
+}
+type Node struct {
+	value interface{}
+	prev  *Node
+}
+
+func New() *Stack {
+	return &Stack{}
+}
+
+func (s *Stack) Push() {
+
+}
+
+func (s *Stack) Pop() {
+
+}
+
+func (s *Stack) Peak() {
+
+}
+
+func longestValidParentheses(s string) int {
+
+	stk := []int{}
+	stk = append(stk, -1)
+
+	max := func(x, y int) int {
+		if x < y {
+			return y
+		}
+		return x
+	}
+
+	maxLen := 0
+	for i := 0; i < len(s); i++ {
+		if s[i] == '(' {
+			stk = append(stk, i)
+		} else {
+			stk = stk[:len(stk)-1]
+			if len(stk) == 0 {
+				stk = append(stk, i)
+			} else {
+				maxLen = max(maxLen, i-stk[len(stk)-1])
+			}
+		}
+	}
+	return maxLen
+}
